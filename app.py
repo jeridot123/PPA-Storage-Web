@@ -71,9 +71,8 @@ def initialize_database():
 # GET COMPLETE WAREHOUSE
 # =========================================================
 
-def get_warehouse():
+def get_warehouse(connection):
 
-    connection = get_db()
     cursor = connection.cursor()
 
     cursor.execute("""
@@ -85,7 +84,6 @@ def get_warehouse():
     rows = cursor.fetchall()
 
     cursor.close()
-    connection.close()
 
     warehouse = {
         lane: {
@@ -117,9 +115,7 @@ def validate_product(product_code):
 # FIND STORAGE LOCATION
 # =========================================================
 
-def find_storage(product_code):
-
-    warehouse = get_warehouse()
+def find_storage(product_code, warehouse):
 
     # -----------------------------------------------------
     # PRIORITY 1
@@ -160,9 +156,8 @@ def find_storage(product_code):
 # FIND PRODUCT FOR OUT
 # =========================================================
 
-def find_product(product_code):
+def find_product(connection, product_code):
 
-    connection = get_db()
     cursor = connection.cursor()
 
     cursor.execute(
@@ -183,13 +178,11 @@ def find_product(product_code):
     row = cursor.fetchone()
 
     cursor.close()
-    connection.close()
 
     if row is None:
         return None
 
     return row["lane"], row["slot"]
-
 
 # =========================================================
 # HOME PAGE
@@ -208,7 +201,11 @@ def index():
 @app.route("/api/warehouse", methods=["GET"])
 def warehouse_status():
 
-    warehouse = get_warehouse()
+    connection = get_db()
+
+    warehouse = get_warehouse(connection)
+
+    connection.close()
 
     occupied = 0
 
@@ -261,12 +258,7 @@ def store_product():
         .upper()
     )
 
-    # -----------------------------------------------------
-    # VALIDATION
-    # -----------------------------------------------------
-
     if not validate_product(product_code):
-
         return jsonify(
             {
                 "success": False,
@@ -274,13 +266,16 @@ def store_product():
             }
         ), 400
 
-    # -----------------------------------------------------
-    # FIND LOCATION
-    # -----------------------------------------------------
+    # Open ONE connection
+    connection = get_db()
 
-    location = find_storage(product_code)
+    # Read warehouse using the same connection
+    warehouse = get_warehouse(connection)
+
+    location = find_storage(product_code, warehouse)
 
     if location is None:
+        connection.close()
 
         return jsonify(
             {
@@ -291,11 +286,6 @@ def store_product():
 
     lane, slot = location
 
-    # -----------------------------------------------------
-    # SAVE
-    # -----------------------------------------------------
-
-    connection = get_db()
     cursor = connection.cursor()
 
     cursor.execute(
@@ -326,7 +316,6 @@ def store_product():
             "slot": slot
         }
     )
-
 # =========================================================
 # API - TAKE PRODUCT
 # =========================================================
@@ -342,12 +331,7 @@ def take_product():
         .upper()
     )
 
-    # -----------------------------------------------------
-    # VALIDATION
-    # -----------------------------------------------------
-
     if not validate_product(product_code):
-
         return jsonify(
             {
                 "success": False,
@@ -355,6 +339,50 @@ def take_product():
             }
         ), 400
 
+    # Open ONE connection
+    connection = get_db()
+
+    # Find product
+    location = find_product(connection, product_code)
+
+    if location is None:
+        connection.close()
+
+        return jsonify(
+            {
+                "success": False,
+                "message": "PRODUCT NOT FOUND"
+            }
+        ), 404
+
+    lane, slot = location
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        UPDATE storage
+        SET product_code = NULL
+        WHERE lane = %s
+        AND slot = %s
+        """,
+        (lane, slot)
+    )
+
+    connection.commit()
+
+    cursor.close()
+    connection.close()
+
+    return jsonify(
+        {
+            "success": True,
+            "message": "ITEM TAKEN",
+            "product_code": product_code,
+            "lane": lane,
+            "slot": slot
+        }
+    )
     # -----------------------------------------------------
     # FIND PRODUCT
     # -----------------------------------------------------
