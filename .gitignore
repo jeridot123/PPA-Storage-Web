@@ -2,9 +2,7 @@
 __pycache__/
 .env
 *.pyc
-
 warehouse.db
 *.zip
 *.rar
-
-.vscode/
+app_oldy.py

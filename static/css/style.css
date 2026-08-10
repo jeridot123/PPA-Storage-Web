@@ -1,0 +1,877 @@
+/* ===========================================
+   GLOBAL
+=========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI",sans-serif;
+    background:#eef3f8;
+    color:#222;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ===========================================
+   LAYOUT
+=========================================== */
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ===========================================
+MAIN
+=========================================== */
+
+.main{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    width:100%;
+
+}
+
+/* ===========================================
+   SIDEBAR
+=========================================== */
+
+.sidebar{
+
+    width:250px;
+
+    background:#0f3d91;
+
+    color:white;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    transition:width .3s;
+
+}
+
+.sidebar.collapsed{
+
+    width:75px;
+
+}
+
+/* ===========================================
+   SIDEBAR HEADER
+=========================================== */
+
+.sidebar-header{
+
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 15px;
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+
+}
+
+/* ===========================================
+   LOGO
+=========================================== */
+
+.logo{
+
+    width:48px;
+
+    height:48px;
+
+    object-fit:contain;
+
+    transition:opacity .2s;
+
+}
+
+/* Hide logo when collapsed */
+
+.sidebar.collapsed .logo{
+
+    display:none;
+
+}
+
+/* ===========================================
+   HAMBURGER BUTTON
+=========================================== */
+
+.sidebar-header button{
+
+    width:40px;
+
+    height:40px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border:none;
+
+    background:none;
+
+    color:white;
+
+    font-size:40px;
+
+    cursor:pointer;
+
+    border-radius:8px;
+
+    transition:.25s;
+
+}
+
+.sidebar-header button:hover{
+
+    background:rgba(255,255,255,.15);
+
+}
+
+/* Center the button when sidebar is collapsed */
+
+.sidebar.collapsed .sidebar-header{
+
+    justify-content:center;
+
+}
+.sidebar-menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-top:20px;
+
+}
+
+.menu-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:16px 18px;
+
+    color:white;
+
+    text-decoration:none;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+    font-size:26px;
+    font-weight:600;
+    transition:.25s;
+
+}
+
+.menu-item:hover{
+
+    background:#1d5bd3;
+
+}
+
+.sidebar.collapsed .menu-item{
+
+    justify-content:center;
+
+}
+
+.sidebar.collapsed .menu-item span{
+
+    display:none;
+
+}
+/* ===========================================
+   CONTENT
+=========================================== */
+
+.content{
+
+    flex:1;
+
+    padding:40px;
+
+    width:100%;
+
+}
+/* ===========================================
+   PAGE TITLE
+=========================================== */
+
+.page h2{
+
+    color:#0f3d91;
+
+    margin-bottom:25px;
+
+    font-size:34px;
+
+}
+
+.page{
+
+    width:100%;
+
+    max-width:none;
+
+    margin:0 auto;
+
+}
+
+/* ===========================================
+   CARD
+=========================================== */
+
+.card{
+
+    width:100%;
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:30px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+}
+
+.card h3{
+
+    margin-bottom:20px;
+    font-size:30px;
+    color:#0f3d91;
+
+}
+
+.card label{
+
+    display:block;
+
+    margin-bottom:12px;
+    font-size:30px;
+    font-weight:600;
+
+}
+
+/* ===========================================
+   INPUT
+=========================================== */
+
+.card input{
+
+    width:100%;
+
+    height:65px;
+
+    font-size:24px;
+
+    padding:0 25px;
+}
+
+.card input:focus{
+
+    outline:none;
+
+    border-color:#2b6cff;
+
+}
+
+/* ===========================================
+BUTTON
+=========================================== */
+
+.card button{
+
+    width:100%;
+
+    height:65px;
+
+    margin-top:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2b6cff;
+
+    color:white;
+
+    font-family:"Segoe UI", sans-serif;
+
+    font-size:28px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        transform .15s ease,
+        box-shadow .2s ease;
+
+}
+
+/* Hover */
+
+.card button:hover{
+
+    background:#1f5be0;
+
+    box-shadow:0 5px 12px rgba(43,108,255,.25);
+
+}
+
+/* Click */
+
+.card button:active{
+
+    transform:scale(.98);
+
+}
+
+/* ===========================================
+   RESULT
+=========================================== */
+
+.card p{
+
+    margin:18px 0;
+
+    font-size:30px;
+
+}
+
+.card strong{
+
+    color:#0f3d91;
+
+}
+
+/* ===========================================
+   TABLE
+=========================================== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+th{
+
+    background:#0f3d91;
+
+    color:white;
+
+    padding:14px;
+
+}
+
+td{
+
+    padding:12px;
+
+    text-align:center;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+tr:hover{
+
+    background:#f4f7fc;
+
+}
+
+/* ===========================================
+   MOBILE
+=========================================== */
+
+@media(max-width:900px){
+
+    .sidebar{
+
+        position:fixed;
+
+        height:100%;
+
+        z-index:999;
+
+    }
+
+    .main{
+
+        margin-left:75px;
+
+    }
+
+}
+
+/* ===========================================
+DISPLAY PAGE
+=========================================== */
+
+.warehouse-layout{
+
+    margin-top:30px;
+
+}
+
+/* ===========================================
+TWISTING MACHINE
+=========================================== */
+
+.twisting-machine{
+
+    width:100%;
+
+    height:70px;
+
+    background:#d9d9d9;
+
+    border-radius:10px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:#444;
+
+    margin-bottom:35px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+/* ===========================================
+WAREHOUSE MAP
+=========================================== */
+
+#warehouseMap{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    overflow-x:auto;
+
+    padding-bottom:15px;
+
+}
+
+/* Header + Rows */
+
+.warehouse-header,
+.warehouse-row{
+
+    display:grid;
+
+    grid-template-columns:70px repeat(17, 90px);
+
+    gap:10px;
+
+}
+
+/* Empty Top Left */
+
+.corner-cell{
+
+    background:transparent;
+
+}
+
+/* Line Header */
+
+.line-header{
+
+    background:#0f3d91;
+
+    color:white;
+
+    border-radius:8px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+    height:45px;
+
+}
+
+/* Position Label */
+
+.position-label{
+
+    background:#0f3d91;
+
+    color:white;
+
+    border-radius:8px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+}
+
+/* Warehouse Cell */
+
+.warehouse-cell{
+
+    width:90px;
+
+    height:70px;
+
+    background:white;
+
+    border:2px solid #d9d9d9;
+
+    border-radius:10px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    font-size:21px;
+
+    font-weight:600;
+
+    transition:.2s;
+
+    cursor:pointer;
+
+}
+
+.warehouse-cell:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 5px 12px rgba(0,0,0,.15);
+
+}
+
+/* ===========================================
+PRODUCT COLORS
+=========================================== */
+
+.warehouse-cell.pe{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+.warehouse-cell.ny{
+
+    background:#16a34a;
+
+    color:white;
+
+}
+
+.warehouse-cell.imp{
+
+    background:#f97316;
+
+    color:white;
+
+}
+
+/* Product Code */
+
+.product-code{
+
+    padding:5px;
+
+    word-break:break-word;
+
+}
+
+/* ===========================================
+INFORMATION PANEL
+=========================================== */
+
+.info-panel{
+
+    position:fixed;
+
+    top:0;
+
+    right:-380px;
+
+    width:380px;
+
+    height:100vh;
+
+    background:white;
+
+    box-shadow:-5px 0 18px rgba(0,0,0,.15);
+
+    transition:right .3s ease;
+
+    z-index:9999;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* Open Panel */
+
+.info-panel.open{
+
+    right:0;
+
+}
+
+/* Header */
+
+.info-header{
+
+    height:70px;
+
+    background:#0f3d91;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 20px;
+
+}
+
+.info-header h3{
+
+    font-size:22px;
+
+    margin:0;
+
+}
+
+.info-header button{
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+}
+
+/* Body */
+
+.info-body{
+
+    padding:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.info-body p{
+
+    margin:0;
+
+    color:#666;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.info-body span{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#0f3d91;
+
+    border-bottom:1px solid #ddd;
+
+    padding-bottom:10px;
+
+}
+
+/* ===========================================
+TAKE OUT BUTTON
+=========================================== */
+
+.card .takeout-button{
+
+    background:#ff7a00;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        transform .15s ease,
+        box-shadow .2s ease;
+
+}
+
+.card .takeout-button:hover{
+
+    background:#e66d00;
+
+    box-shadow:0 5px 12px rgba(255,122,0,.25);
+
+}
+
+.card .takeout-button:active{
+
+    transform:scale(.98);
+
+}
+
+
+/* ===========================================
+   CODE LEGEND
+   ENTRY / TAKE OUT ONLY
+   =========================================== */
+
+.code-legend{
+
+    width:100%;
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:25px 30px;
+
+    margin-top:10px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+}
+
+
+/* Legend Title */
+
+.code-legend h3{
+
+    margin:0 0 20px 0;
+
+    color:#0f3d91;
+
+    font-size:40px;
+
+}
+
+
+/* Each legend row */
+
+.legend-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:12px 0;
+
+    font-size:35px;
+
+}
+
+
+/* Code */
+
+.legend-item strong{
+
+    color:#222;
+
+    min-width:65px;
+
+    font-weight:700;
+
+}
+
+
+/* Description */
+
+.legend-item span{
+
+    color:#444;
+
+}

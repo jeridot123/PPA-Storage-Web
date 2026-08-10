@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page">
+
+    <h2>Warehouse Storage Map</h2>
+
+    <div class="warehouse-layout">
+
+        <!-- Twisting Machine -->
+        <div class="twisting-machine">
+
+            TWISTING MACHINE
+
+        </div>
+
+        <!-- Warehouse Grid -->
+        <div id="warehouseMap"></div>
+
+        <!-- ==========================================
+INFO PANEL
+========================================== -->
+
+<div id="infoPanel" class="info-panel">
+
+    <div class="info-header">
+
+        <h3>Warehouse Information</h3>
+
+        <button id="closeInfo">
+            ✕
+        </button>
+
+    </div>
+
+    <div class="info-body">
+
+        <p><strong>Product Code</strong></p>
+        <span id="infoProduct">-</span>
+
+        <p><strong>Batch</strong></p>
+        <span id="infoBatch">-</span>
+
+        <p><strong>Stored Time</strong></p>
+        <span id="infoTime">-</span>
+
+        <p><strong>Line</strong></p>
+        <span id="infoLine">-</span>
+
+        <p><strong>Position</strong></p>
+        <span id="infoPosition">-</span>
+
+    </div>
+
+</div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/display.js') }}"></script>
+
+{% endblock %}

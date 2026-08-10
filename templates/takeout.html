@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page">
+
+    <h2>Take Out Product</h2>
+
+    <!-- Search Card -->
+    <div class="card">
+
+        <label for="barcode">
+            Scan Barcode
+        </label>
+
+        <input
+            type="text"
+            id="barcode"
+            placeholder="Scan barcode here..."
+            autofocus
+        >
+
+        <button id="searchButton" class="takeout-button">
+            Search Product
+        </button>
+
+    </div>
+
+    <!-- Result Card -->
+    <div class="card">
+
+        <h3>Result</h3>
+
+        <p>
+            <strong>Product :</strong>
+            <span id="resultProduct">-</span>
+        </p>
+
+        <p>
+            <strong>Line :</strong>
+            <span id="resultLine">-</span>
+        </p>
+
+        <p>
+            <strong>Position :</strong>
+            <span id="resultPosition">-</span>
+        </p>
+
+        <p>
+            <strong>Status :</strong>
+            <span id="resultStatus">
+                Waiting for barcode...
+            </span>
+        </p>
+
+        <button id="takeButton" class="takeout-button">
+            Take Product
+    </button>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/takeout.js') }}"></script>
+
+<div class="code-legend">
+
+    <h3>Code Legend</h3>
+
+    <div class="legend-item">
+        <strong>NYn</strong>
+        <span>= Nylon type n</span>
+    </div>
+
+    <div class="legend-item">
+        <strong>PEn</strong>
+        <span>= Polyester type n</span>
+    </div>
+
+    <div class="legend-item">
+        <strong>IMPn</strong>
+        <span>= Import Items type n</span>
+    </div>
+
+</div>
+
+{% endblock %}
+

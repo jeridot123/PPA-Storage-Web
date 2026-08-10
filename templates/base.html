@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Warehouse Storage System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+
+        <div class="sidebar-header">
+
+            <img
+            src="{{ url_for('static', filename='img/CatBlack.png') }}"
+            alt="Logo"
+            class="logo"
+            >
+
+            <button id="toggleSidebar">
+                ☰
+            </button>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="/entry" class="menu-item">
+                📥
+                <span>Entry / Store</span>
+            </a>
+
+            <a href="/takeout" class="menu-item">
+                📤
+                <span>Take Out</span>
+            </a>
+
+            <a href="/display" class="menu-item">
+                🗺
+                <span>Display</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+
+        <header class="topbar">
+            <h1>Warehouse Storage System</h1>
+        </header>
+
+        <main class="content">
+
+            {% block content %}
+            {% endblock %}
+
+        </main>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+
+</body>
+</html>
